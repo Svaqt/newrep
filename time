@@ -1,0 +1,31 @@
+#!/bin/bash
+now() {
+  echo $(($(date +%s%N) / 1000000))
+}
+
+help() {
+echo "Введите команду (скрипт <команда)>"
+echo "Пример ./time ls "
+}
+
+if [ $# -eq 0 ]; then
+help
+exit 1
+fi
+
+if [ "$1" == "-h" ]; then
+help
+exit 0
+fi
+
+start=$(now)
+eval "$@"
+
+fin=$(now)
+
+ext=$((fin - start))
+
+echo "${ext} ms"
+
+
+
